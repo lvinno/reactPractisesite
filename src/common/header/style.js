@@ -23,6 +23,7 @@ export const Nav = styled.div`
 width: 960px;
 height: 100%;
 margin: 0 auto;
+padding-right: 70px;
 box-sizing: border-box;
 `
 
@@ -48,16 +49,21 @@ export const NavSearch = styled.input.attrs({
 })`
 width:160px;
 height: 38px;
-padding: 0 20px;
+padding: 0 30px 0 20px;
 margin-top: 9px;
 margin-left: 20px;
 border: none;
 outline: none;
+box-sizing: boder-box;
 border-radius: 19px;
 background:#eee;
+color: #777;
 font-size: 14px;
 &::placeholder{
     color:#999;
+}
+&.focused{
+    width: 240px;
 }
 `
 
@@ -83,5 +89,39 @@ font-size: 14px;
 &.writting {
     background-color:#ea6f5a;
     color: #fff;
+}
+`
+
+export const SearchWrapper = styled.div`
+float: left;
+position: relative;
+
+.slide-enter {
+    transition: all 200ms ease-out;
+}
+.slide-enter-active {
+    width: 240px;
+}
+
+.slide-exit {
+    transition: all 200ms ease-out;
+}
+
+.slide-exit-active {
+    width: 160px;
+}
+
+.iconfont {
+    position: absolute;
+    right: 0px;
+    bottom: 5px;
+    width: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    &.focused {
+        background:#777;
+        color: #fff;
+        }
 }
 `
