@@ -1,8 +1,38 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
-import { HeaderWrapper,Logo,Nav,NavItem,NavSearch,Addition,Button,SearchWrapper } from './style.js'
+import { 
+    HeaderWrapper,Logo,Nav,NavItem,
+    NavSearch,Addition,Button,SearchWrapper,
+    SearchInfo,SearchInfoTitle,SearchInfoSwitch,
+    SearchInfoItem, SearchInfoList
+} from './style.js'
+import { actionCreators } from './store'
 
+
+const getListArea = (show) => {
+    if(show){
+        return ( 
+            <SearchInfo>
+           <SearchInfoTitle>
+               热门搜索
+               <SearchInfoSwitch>换一批</SearchInfoSwitch>
+           </SearchInfoTitle>
+            <SearchInfoList>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+            </SearchInfoList>
+       </SearchInfo>
+       )
+    }else{
+        return null;
+    }
+}
 const Header = (props) => {
         return (
 
@@ -27,6 +57,7 @@ const Header = (props) => {
                             </NavSearch>
                             </CSSTransition>
                         <span className={props.focused ? "focused iconfont":"iconfont"}>&#xe62d;</span>
+                      {getListArea(props.focused)}
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -42,23 +73,19 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        focused: state.header.focused
+        focused: state.get('header').get('focused')
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
     handleInputFocus(){
-        const action = {
-            type:"search_focus"
-        }
+        const action = actionCreators.searchFocus();
         dispatch(action);
     },
 
     handleInputBlur(){
-        const action = {
-            type:"search_blur"
-        }
+        const action = actionCreators.searchBlur();
         dispatch(action);
     }
   }
