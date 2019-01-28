@@ -12,17 +12,27 @@ import { actionCreators } from './store'
 class Header extends Component{
 
     getListArea() {
-    if(this.props.focused){
+        const { focused,list,page,mouseIn,totalPage,handleMouseEnter,handleMouseLeave,handleChangePage } = this.props;
+        const newList = list.toJS();
+        const pageList = [];
+        if(newList.length){
+            for(let i=(page-1) *10;i<page * 10;i++){
+                pageList.push(
+                    <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+                )
+            }
+        }
+    if(focused || mouseIn){
         return ( 
-            <SearchInfo>
+            <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
            <SearchInfoTitle>
                热门搜索
-               <SearchInfoSwitch>换一批</SearchInfoSwitch>
+               <SearchInfoSwitch onClick={() => handleChangePage(page,totalPage,this.spinIcon)}>
+               <span ref={(icon)=>{this.spinIcon = icon}}className="iconfont spin">&#xe612;</span>
+               换一批</SearchInfoSwitch>
            </SearchInfoTitle>
             <SearchInfoList>
-                {this.props.list.map((item) => {
-                    return  <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                })}
+                {pageList}
            </SearchInfoList>
        </SearchInfo>
        )
@@ -31,6 +41,7 @@ class Header extends Component{
     }
 }
         render(){
+            const { focused,handleInputBlur,handleInputFocus,list } = this.props;
             return (
                 <HeaderWrapper>
                   <Logo/>
@@ -43,16 +54,16 @@ class Header extends Component{
                         </NavItem>
                         <SearchWrapper>
                             <CSSTransition
-                                in={this.props.focused}
+                                in={focused}
                                 timeout={200}
                                 classNames="slide">
-                                <NavSearch className={this.props.focused ? "focused":""}
-                                        onFocus={this.props.handleInputFocus}
-                                        onBlur={this.props.handleInputBlur}>
+                                <NavSearch className={focused ? "focused":""}
+                                        onFocus={()=>handleInputFocus(list)}
+                                        onBlur={handleInputBlur}>
                                 </NavSearch>
                                 </CSSTransition>
-                            <span className={this.props.focused ? "focused iconfont":"iconfont"}>&#xe62d;</span>
-                          {this.getListArea(this.props.focused)}
+                            <span className={focused ? "focused iconfont zoom":"iconfont zoom"}>&#xe62d;</span>
+                          {this.getListArea(focused)}
                         </SearchWrapper>
                     </Nav>
                     <Addition>
@@ -70,14 +81,40 @@ class Header extends Component{
 const mapStateToProps = (state) => {
     return {
         focused: state.get('header').get('focused'),
-        list: state.getIn(["header","list"])
+        mouseIn: state.getIn(['header','mouseIn']),
+        list: state.getIn(["header","list"]),
+        page: state.getIn(["header","page"]),
+        totalPage: state.getIn(["header","totalPage"])
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    handleInputFocus(){
-        dispatch(actionCreators.getList());
+    handleChangePage(page,totalPage,spin){
+        let originAngle = spin.style.transform.replace(/[^0-9]/ig,'');
+        if(originAngle){
+            originAngle = parseInt(originAngle,10);
+        }else{
+            originAngle = 0;
+        }
+        spin.style.transform  = 'rotate('+(originAngle+360)+'deg)';
+
+       if(page < totalPage){
+            dispatch(actionCreators.changePage(page+1))
+        }else{
+            dispatch(actionCreators.changePage(1))
+        }
+    },
+    handleMouseLeave(){
+        dispatch(actionCreators.mouseLeave());
+    },
+    handleMouseEnter(){
+        dispatch(actionCreators.mouseEnter())
+    },
+    handleInputFocus(list){
+        if(list.size === 0){
+            dispatch(actionCreators.getList());
+        }
         const action = actionCreators.searchFocus();
         dispatch(action);
     },

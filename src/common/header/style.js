@@ -111,7 +111,7 @@ position: relative;
     width: 160px;
 }
 
-.iconfont {
+.zoom {
     position: absolute;
     right: 0px;
     bottom: 5px;
@@ -146,6 +146,16 @@ color: #969696;
 export const SearchInfoSwitch = styled.span`
 float: right;
 font-size: 13px;
+cursor: pointer;
+.spin {
+    display: block;
+    float: left;
+    font-szie: 12px;
+    margin-right: 2px;
+    transition: all 0.2s ease-in;
+    transform: rotate(0deg);
+    transition-origin: center center;
+}
 `
 export const SearchInfoList = styled.div`
 overflow: hidden;
