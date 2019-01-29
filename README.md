@@ -1,4 +1,4 @@
-## https://github.com/lvinno/reactPractisesite
+## https://lvinno.github.io/reactPractisesite/
 
 ## React demo project
 
