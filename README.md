@@ -1,4 +1,4 @@
- [](https://github.com/lvinno/reactPractisesite).
+## https://github.com/lvinno/reactPractisesite
 
 ## React demo project
 
