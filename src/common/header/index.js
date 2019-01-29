@@ -8,6 +8,8 @@ import {
     SearchInfoItem, SearchInfoList
 } from './style.js'
 import { actionCreators } from './store'
+import { actionCreators as loginActionCreators } from '../../pages/login/store'
+import { Link } from 'react-router-dom'
 
 class Header extends Component{
 
@@ -41,14 +43,20 @@ class Header extends Component{
     }
 }
         render(){
-            const { focused,handleInputBlur,handleInputFocus,list } = this.props;
+            const { focused,handleInputBlur,handleInputFocus,list,login,logout } = this.props;
             return (
                 <HeaderWrapper>
-                  <Logo/>
+                    <Link to='/'>
+                        <Logo/>
+                    </Link>
                     <Nav>
                         <NavItem className="left active">首页</NavItem>
                         <NavItem className="left">下载APP</NavItem>
-                        <NavItem className="right">登录</NavItem>
+                        {
+                            login?<NavItem onClick={logout} className="right">退出</NavItem>:
+                             <Link to="/login"><NavItem className="right">登录</NavItem></Link>
+                        }
+                        
                         <NavItem className="right">
                             <span className="iconfont">&#xe636;</span>
                         </NavItem>
@@ -84,7 +92,8 @@ const mapStateToProps = (state) => {
         mouseIn: state.getIn(['header','mouseIn']),
         list: state.getIn(["header","list"]),
         page: state.getIn(["header","page"]),
-        totalPage: state.getIn(["header","totalPage"])
+        totalPage: state.getIn(["header","totalPage"]),
+        login: state.getIn(['login',"login"])
     }
 }
 
@@ -122,6 +131,9 @@ const mapDispatchToProps = (dispatch) => {
     handleInputBlur(){
         const action = actionCreators.searchBlur();
         dispatch(action);
+    },
+    logout(){
+        dispatch(loginActionCreators.logout())
     }
   }
 }
