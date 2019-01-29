@@ -13,7 +13,7 @@ class App extends Component {
     
     return (
       <Provider store={store}>
-          <BrowserRouter>
+          <BrowserRouter basename='/reactPractisesite'>
             <div>
             <Header />
             <Route path="/" exact component={Home}></Route>
