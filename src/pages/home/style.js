@@ -126,3 +126,23 @@ text-align: center;
 border: 1px solid #ccc;
 font-size: 14px;
 `
+
+
+export const InfoWrapper = styled.div`
+position: relative;
+margin: 10px 0;
+border: 1px solid #dcdcdc;
+border-radius: 15px;
+overflow: hidden;
+cursor: pointer;
+img {
+    float: left;
+    margin-left:2px;
+    width: 60px;
+    height:60px;
+}
+p {
+    padding-top: 5px;
+    text-align: center;
+}
+`

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import {HomeWrapper,HomeLeft,HomeRight,BackTop} from './style'
 import Topic from './components/Topic'
 import Writer from './components/Writer'
+import Info from './components/Info'
 import List from './components/List'
 import Recommend from './components/Recommend'
 import { actionCreators } from './store'
@@ -22,7 +23,8 @@ class Home extends PureComponent {
                 </HomeLeft>
                 <HomeRight>
                     <Recommend></Recommend>
-                    <Writer></Writer>
+                    <Info></Info>
+                    <Writer></Writer>                
                 </HomeRight>
                 {this.props.showScroll? <BackTop onClick={this.handleScrollTop}>顶部</BackTop>:null}
                
