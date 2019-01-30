@@ -7,7 +7,7 @@ class Info extends Component {
     render(){
       return (
            <InfoWrapper>
-               <img src="//cdn2.jianshu.io/assets/web/download-index-side-qrcode-cb13fc9106a478795f8d10f9f632fccf.png" alt=""/>
+               <img src="./static/download-index-side-qrcode-cb13fc9106a478795f8d10f9f632fccf.png" alt=""/>
                <p>下载简书和手机APP</p>
                <p>随时随地创作内容</p> 
            </InfoWrapper>
