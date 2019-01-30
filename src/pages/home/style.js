@@ -4,6 +4,9 @@ export const HomeWrapper = styled.div`
 overflow: hidden;
 width:960px;
 margin:0 auto;
+@media screen and (max-width: 1265px) {
+    margin: 0 147px;
+}
 `
 
 export const HomeLeft = styled.div`

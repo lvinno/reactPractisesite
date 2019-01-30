@@ -5,12 +5,13 @@ export const HeaderWrapper = styled.div`
 z-index: 1;
 position: relative;
 height:58px;
-width: 1500px;
+width: 100%;
+min-width: 1265px;
 border-bottom:1px solid #f0f0f0;
 `
 
 export const Logo = styled.div`
-position: absolute;
+float: left;
 top: 0px;
 left: 0px;
 display:block;
@@ -20,10 +21,10 @@ background:url(${logoPic});
 background-size: contain;
 `
 export const Nav = styled.div`
+float: left;
 width: 960px;
 height: 100%;
 margin: 0 auto;
-padding-right: 70px;
 box-sizing: border-box;
 `
 
@@ -68,10 +69,12 @@ font-size: 14px;
 `
 
 export const Addition = styled.div`
-position: absolute;
+float: right;
+margin-right: 5px;
 right: 0px;
 top: 0px;
 height: 56px;
+width: 180px;
 `
 
 export const Button = styled.div`
@@ -79,7 +82,7 @@ float: right;
 line-height: 38px;
 border-radius: 19px;
 margin-top: 9px;
-margin-right: 20px;
+margin-right: 5px;
 padding: 0 20px;
 border: 1px solid #ea6f5a;
 font-size: 14px;

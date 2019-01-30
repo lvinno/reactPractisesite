@@ -16,7 +16,10 @@ height: 180px;
 margin: 100px auto;
 padding-top: 20px;
 background: #fff;
-box-shadow: 0 0 8px rgbd(0,0,0,.1)
+box-shadow: 0 0 8px rgbd(0,0,0,.1);
+@media screen and (max-width: 1265px) {
+    margin: 100px 422px;
+}
 `
 
 export const Input= styled.input`
